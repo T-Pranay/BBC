@@ -1,0 +1,99 @@
+html, body, #root {
+  height: 100%;             
+  margin: 0;                 
+  padding: 0;
+  background-color: #f5f5f577; 
+  color: white;
+}
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome{
+  text-align:center;
+  display:block;
+  padding:1.5rem 0 1.5rem 0;
+  background:linear-gradient(90deg,rgba(25, 126, 163, 0.575),rgb(6, 80, 106)) ;
+  font-size:2.5rem ;
+  border-radius: 10px;
+}
+
+.options{
+  background: linear-gradient(90deg,rgb(196, 196, 196),rgba(66, 66, 66, 0.204));
+  width:90%;
+  height:4rem;
+  margin-top: 1rem;
+  border-radius:25px ;
+  text-decoration: none;
+  position: relative; 
+}
+
+.list{
+  list-style: none;
+  display:flex;
+  justify-content: space-around;
+  user-select: none;
+  padding: 00;
+
+
+}
+
+@media screen and (max-width:490px){
+    .options{
+        width:100%;
+    } 
+}
+
+.list li {
+  text-align: center;
+  cursor: pointer;
+  position: relative; 
+  padding: 4px 0px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  font-size: 1.3rem;
+  color: black;
+}
+
+
+.list li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0px;
+  height: 2px;
+  background-color: #4c7e93;
+  transition: all 0.3s ease;
+  transform: translate(-50%,-200%);
+}
+
+.list li:hover::after {
+  width: 13vw; 
+}
+
+.list li.active::after {
+  width: 20vw;
+}
+
+/* Game page*/
+  .add-game{
+    color:black;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg,rgb(97, 143, 167),rgb(125, 217, 225));
+    width:60%;
+    margin:1.5rem auto;
+    border-radius:15px;
+    border: 0.5px rgb(75, 75, 75) solid;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  #add-text{
+    padding: 0 1rem 0 1rem;
+  }
