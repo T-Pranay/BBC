@@ -4,12 +4,17 @@ import {
   doc,
   setDoc,
   getDocs,
-  collection
+  collection,
+  deleteField,
+  updateDoc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 import { db } from "./firebase.js";
 
 import { useState,useEffect } from "react"
 import "./Full.css"
+import Team from './team.jsx'
+import { useNavigate,Route,Routes } from "react-router-dom";
 
 
 
@@ -20,7 +25,12 @@ function Game(){
     const [ques,setQues] = useState('');
     const [overlay,setOverlay] = useState(false);
     const [gamesSet,setGamesSet] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [deletegame,setDeletegame] = useState(null);
+    const [confirmdelete,setConfirmdelete] = useState(null);
+    const [temptext,setTemptext] = useState("");
 
+    const navigate = useNavigate();
 
        const fetchGames = async() =>{
             try{
@@ -32,16 +42,24 @@ function Game(){
                 setGamesSet(data)
             } catch(err){
                 console.error("Error fetching games:", err);
-            }
+            }finally {
+        setLoading(false);
+      }
         }
    
 
     useEffect(()=>{
         fetchGames();
     },[]);
+
     const handleSubmit =async (e) => {
         e.preventDefault();
         setOverlay(false);
+
+        setTemptext("Loading new game...");
+        setTimeout(() => {
+            setTemptext('')
+        }, 4000);
 
         if (!game || teams < 1 || ques < 1) {
             alert("Enter valid values");
@@ -59,6 +77,9 @@ function Game(){
 
       fetchGames();
 
+
+
+
       setGame("");
       setTeams("");
       setQues("");
@@ -67,6 +88,28 @@ function Game(){
       alert("Failed to create game.");
     }
     }
+
+    const handleDelete = async (id) =>{
+        try{
+            setGamesSet((prevGames) => prevGames.filter((g) => g.id !== id));
+
+            setTemptext("Deleted game...");
+            setTimeout(() => {
+                setTemptext('')
+            }, 4000);
+
+            const docId = doc(db,'games',id);
+            await deleteDoc(docId);
+            setConfirmdelete(null)
+            fetchGames();
+        } catch(err){
+            console.log(err)
+        }
+    }
+
+    const navigatePage = (gameId,teamName) => {
+        navigate(`/team/${gameId}/${teamName}`);
+    };
 
 
     return(
@@ -91,6 +134,12 @@ function Game(){
                 <p id="add-text">Add Game</p>
             </div>
 
+            {/* {temp text} */}
+
+            {temptext && (
+                <div className="temp-text">{temptext} Loading new game...</div>
+            )}
+
             {/* overlay */}
 
             {overlay && (
@@ -112,24 +161,56 @@ function Game(){
 
             {/* show games and teams */}
 
-            {gamesSet.length > 0 && (
-            <>
-                {gamesSet.map((g) => (
-                <div key={g.id} className="games-content">
-                    <div className="game-card-id">
-                        <div className="game-name">{g.name}</div>
-                        <div className="team-boxes">
-                            {Array.from({ length: g.teams }).map((_, i) => (
-                            <div key={i} className="box">
-                                Team {i + 1}
-                            </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+     {loading ? (
+        <div className="games-skeleton">
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="game-card-skeleton">
+              <div className="game-name-skeleton shimmer"></div>
+              <div className="team-boxes">
+                {[...Array(3)].map((_, j) => (
+                  <div key={j} className="box-skeleton shimmer"></div>
                 ))}
-            </>
-            )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        gamesSet.length > 0 && (
+          <>
+            {gamesSet.map((g) => (
+              <div key={g.id} className="games-content">
+                <div className="game-card-id">
+                  <div className="game-name">{g.name}</div>
+                  <div className="more" onClick={() => setDeletegame(deletegame === g.id ? null : g.id)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000ff"><path d="M240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400Z"/></svg>
+                 </div>
+                 {deletegame === g.id && (
+                    <>
+                        <div className="delete" onClick={() => setConfirmdelete(g.id)}>Delete</div>
+                        {confirmdelete === g.id && (
+                            <div className="confirm-delete">
+                                <div className="doc-name">Delete {g.name}?</div>
+                                <ul id="delete-options">
+                                    <li id="cancel" onClick={() => {setConfirmdelete(null); setDeletegame(null)}}>Cancel</li>
+                                    <li id="delete"  onClick={() => {handleDelete(g.id);setConfirmdelete(null)}}>Delete</li>
+                                </ul>
+                            </div>
+                        )}
+                    </>
+                 )}
+                  <div className="team-boxes">
+                    {Array.from({ length: g.teams }).map((_, i) => (
+                      <div key={i} className="box" onClick = {() =>{navigatePage(g.id,i + 1)}}>
+                        Team {i + 1}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+        )
+      )}
         </>
     )
 }

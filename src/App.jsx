@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard.jsx";
 import Login from "./Login.jsx";
 import Loading from "./Loading.jsx";
+import Team from './team.jsx'
+import Game from "./game.jsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -22,20 +24,29 @@ function App() {
   if (loading) return <Loading />;
 
   return (
+    <>
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route 
+          path="/" 
+          element={<Navigate to="/login" />} 
+      />
 
       <Route
-         path="/login"
-         element = {isLoggedIn ? (<Navigate to ="/dashboard" />) : (<Login setIsLoggedIn={setIsLoggedIn} />)}
+          path="/login"
+          element={isLoggedIn ? (<Navigate to="/dashboard" />) : (<Login setIsLoggedIn={setIsLoggedIn} />)} 
       />
+
       <Route
-        path="/dashboard"
-        element={
-          isLoggedIn ? <Dashboard /> : <Navigate to="/login" />
-        }
+          path="/dashboard"
+          element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} 
       />
+
+      <Route index element={<Game />} />
+      <Route path="/team/:gameId/:teamName" element={<Team />} />
+
+
     </Routes>
+      </>
   );
 }
 

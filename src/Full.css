@@ -1,39 +1,42 @@
-html, body, #root {
-  height: 100%;             
-  margin: 0;                 
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
   padding: 0;
-  background-color: #f5f5f577; 
+  background-color: #f5f5f577;
   color: rgb(0, 0, 0);
 }
+
 .dashboard-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.welcome{
-  text-align:center;
-  display:block;
-  padding:1.5rem 0 1.5rem 0;
-  background:linear-gradient(90deg,rgba(25, 126, 163, 0.575),rgb(6, 80, 106)) ;
-  font-size:2.5rem ;
+.welcome {
+  text-align: center;
+  display: block;
+  padding: 1.5rem 0 1.5rem 0;
+  background: linear-gradient(90deg, rgba(25, 126, 163, 0.575), rgb(6, 80, 106));
+  font-size: 2.5rem;
   border-radius: 10px;
-  color:rgb(255, 255, 255)
+  color: rgb(255, 255, 255)
 }
 
-.options{
-  background: linear-gradient(90deg,rgb(196, 196, 196),rgba(66, 66, 66, 0.204));
-  width:90%;
-  height:4rem;
+.options {
+  background: linear-gradient(90deg, rgb(196, 196, 196), rgba(66, 66, 66, 0.204));
+  width: 90%;
+  height: 4rem;
   margin-top: 1rem;
-  border-radius:25px ;
+  border-radius: 25px;
   text-decoration: none;
-  position: relative; 
+  position: relative;
 }
 
-.list{
+.list {
   list-style: none;
-  display:flex;
+  display: flex;
   justify-content: space-around;
   user-select: none;
   padding: 00;
@@ -41,16 +44,16 @@ html, body, #root {
 
 }
 
-@media screen and (max-width:490px){
-    .options{
-        width:100%;
-    } 
+@media screen and (max-width:490px) {
+  .options {
+    width: 100%;
+  }
 }
 
 .list li {
   text-align: center;
   cursor: pointer;
-  position: relative; 
+  position: relative;
   padding: 4px 0px;
   border-radius: 4px;
   transition: background-color 0.2s;
@@ -69,11 +72,11 @@ html, body, #root {
   height: 2px;
   background-color: #4c7e93;
   transition: all 0.3s ease;
-  transform: translate(-50%,-200%);
+  transform: translate(-50%, -200%);
 }
 
 .list li:hover::after {
-  width: 13vw; 
+  width: 13vw;
 }
 
 .list li.active::after {
@@ -81,145 +84,149 @@ html, body, #root {
 }
 
 /* Game page*/
-  .add-game{
-    color:black;
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg,rgb(97, 143, 167),rgb(125, 217, 225));
-    width:60%;
-    margin:1.5rem auto;
-    border-radius:15px;
-    border: 0.5px rgb(75, 75, 75) solid;
-    user-select: none;
-    cursor: pointer;
-  }
+.add-game {
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgb(97, 143, 167), rgb(125, 217, 225));
+  width: 60%;
+  margin: 1.5rem auto;
+  border-radius: 15px;
+  border: 0.5px rgb(75, 75, 75) solid;
+  user-select: none;
+  cursor: pointer;
+}
 
-  #add-text{
-    padding: 0 1rem 0 1rem;
-  }
+#add-text {
+  padding: 0 1rem 0 1rem;
+}
 
-  .blur {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99;
-    backdrop-filter: blur(5px);
-    pointer-events: auto;
-  }
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  backdrop-filter: blur(5px);
+  pointer-events: auto;
+}
 
-  .overlay{
-    z-index: 1000; 
-    display: flex;
-    flex-direction: column;
-    margin: -2rem auto;
-    justify-content: center;
-    pointer-events: auto;
-    width:60%;
-    max-width:500px;
-    background: rgba(0, 0, 0, 0.525);
-    padding:1rem 1rem 1rem 1rem;
-    border-radius: 25px;
-    justify-content: center;
-    position: fixed;  
-    top: 50%;          
-    left: 50%;        
-    transform: translate(-50%, -40%);
-  }
+.overlay {
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  margin: -2rem auto;
+  justify-content: center;
+  pointer-events: auto;
+  width: 60%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.525);
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 25px;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
 
-  .cancel{
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    position: absolute;
-    right:15px;
-    top:15px;
-    margin:1rem;
-    color: aliceblue;
-  }
+.cancel {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  margin: 1rem;
+  color: aliceblue;
+}
 
-  #game-label,#count-label,#ques-label{
-    margin:2rem 0rem 0.1rem 1.2rem;
-    font-size: 22px;
-    color: rgb(255, 255, 255);
-  }
+#game-label,
+#count-label,
+#ques-label {
+  margin: 2rem 0rem 0.1rem 1.2rem;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+}
 
-  #game-label{
-    margin-top: 3rem;
-  }
+#game-label {
+  margin-top: 3rem;
+}
 
-  .overlay input{
-    width:85%;
-    margin:0.2rem auto;
-    font-size: 18px;
-    padding:0.3rem 0.8rem;
-    border-radius: 10px;
-    border: none;
-  }
+.overlay input {
+  width: 85%;
+  margin: 0.2rem auto;
+  font-size: 18px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  border: none;
+}
 
-  .overlay input:focus{
-    outline: none;
-    border:3px solid #4c7e93;
-  }
+.overlay input:focus {
+  outline: none;
+  border: 3px solid #4c7e93;
+}
 
-  .game-submit{
-    width:auto;
-    margin:2rem auto;
-    border-radius: 10px;
-    font-size: 20px;
-    border: 1.5px solid white;
-    background: linear-gradient(90deg,rgba(255, 255, 255, 0.66),rgba(93, 93, 93, 0.173));
-    padding:0.6rem 1.2rem;
-    user-select: none;
-    cursor: pointer;
-    box-shadow: 0px 0px 5px white;;
-  }
+.game-submit {
+  width: auto;
+  margin: 2rem auto;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1.5px solid white;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.66), rgba(93, 93, 93, 0.173));
+  padding: 0.6rem 1.2rem;
+  user-select: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px white;
+  ;
+}
 
-  .games-content{
-    background:rgba(0, 0, 0, 0.259) ;
-    width:85vw;
-    height:auto;
-    margin:2rem auto;
-    /* margin-bottom:1rem; */
-    padding:1rem;
-    border-radius:15px;
-  }
+.games-content {
+  background: rgba(0, 0, 0, 0.259);
+  width: 85vw;
+  height: auto;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 15px;
+  position: relative;
+}
 
-  .game-name{
-    width:100%;
-    margin:0.5rem 1rem 1rem 1rem;
-    font-size: large;
-  }
+.game-name {
+  width: 100%;
+  margin: 0.5rem 1rem 1rem 1rem;
+  font-size: 1.3rem;
+  font-weight: 350;
+}
 
-  .team-boxes{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin:0rem auto;
-    justify-items: center;
-  }
+.team-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 0rem auto;
+  justify-items: center;
+}
 
-  .box{
-    background-color: #4c7e93;
-    height:200px;
-    width:200px;
-    border-radius: 10px;
-    display: block;
-    text-align: center;
-    justify-content: center;
-    align-content: center;
-    font-size: larger;
-    font-weight: 400;
-    color: white;
-    user-select: none;
-    cursor: pointer;
-  }
+.box {
+  background-color: #4c7e93;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  font-size: larger;
+  font-weight: 400;
+  color: white;
+  user-select: none;
+  cursor: pointer;
+}
 
-  @media (max-width: 500px) {
-  .team-boxes{
+@media (max-width: 500px) {
+  .team-boxes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
@@ -227,5 +234,154 @@ html, body, #root {
   .box {
     height: 150px;
     width: 150px;
+  }
+}
+
+.more{
+  position: absolute;
+  top:15px;
+  right:35px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.delete{
+  background-color: white;
+  color: red;
+  padding:0.7rem;
+  border-radius: 10px;
+  font-size: large;
+  font-weight: 500;
+  position: absolute;
+  top:6px;
+  right:70px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.games-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.game-card-skeleton {
+  padding: 1rem;
+  border-radius: 8px;
+  height: 50vh;
+  background: #2a2a2a;
+}
+
+.game-name-skeleton {
+  height: 20px;
+  width: 150px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background: #444;
+}
+
+.box-skeleton {
+  height: 150px;
+  width: 150px;
+  margin: 5px;
+  border-radius: 6px;
+  background: #444;
+}
+
+@media screen and (max-width:500px) {
+  .game-card-skeleton {
+    height: 40vh;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(270deg,
+      #444 25%,
+      #555 50%,
+      #444 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.confirm-delete{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.388);
+  top:40%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  user-select: none;
+  font-size: larger;
+  padding: 1rem;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  height:180px;
+}
+
+.doc-name{
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+#delete-options{
+  text-decoration: none;
+  text-decoration-style: none;
+  display: flex;
+  gap:1rem;
+  list-style: none;
+  margin-top:4rem;
+  font-size: larger;
+  cursor: pointer;
+  user-select: none;
+}
+
+#cancel{
+  background-color: white;
+  padding:0.3rem 0.8rem;
+  border-radius: 25px;
+  position: relative;
+  left: -30px;
+}
+
+#delete{
+  background-color: rgb(213, 43, 43);
+  color: white;
+  padding:0.3rem 0.8rem;
+  border-radius: 25px;
+  position: relative;
+  right: 10px;
+}
+
+.temp-text{
+  position: fixed;
+  left: 50%;
+  bottom: 5%;
+  background-color: rgba(215, 215, 215, 0.407);
+  font-size: 22px;
+  padding: 0.2rem 1rem;
+  border-radius: 25px;
+  z-index: 10;
+  backdrop-filter: blur(15px);
+  transform: translateX(-50%);
+  display:block;      
+  text-align: center;
+  width:100% auto;
+}
+
+@media (max-width:500px){
+  .temp-text{
+    font-size: 18px;
   }
 }
