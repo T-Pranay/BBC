@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Full.css";
 import Play from './play.jsx'
 import Game from './game.jsx'
-import Teams from './teams.jsx'
+import Score from './score.jsx'
 
 function Dashboard({ setIsLoggedIn }) {
 
@@ -15,7 +15,7 @@ function Dashboard({ setIsLoggedIn }) {
             <header className="options">
                 <ul className="list">
                     <li id="game" className={active === "game" ? "active" : ""} onClick={() => setActive("game")}>Game</li>
-                    <li id="teams" className={active === "teams" ? "active" : ""} onClick={() => setActive("teams")}>Teams</li>
+                    <li id="score" className={active === "score" ? "active" : ""} onClick={() => setActive("score")}>Score</li>
                     <li id="play" className={active === "play" ? "active" : ""}onClick={() => setActive("play")}>Play</li>
                 </ul>
             </header>
@@ -24,7 +24,7 @@ function Dashboard({ setIsLoggedIn }) {
    
       <main>
         {active === "game" && <Game />}
-        {active === "teams" && <Teams />}
+        {active === "score" && <Score />}
         {active === "play" && <Play />}
       </main>  
     </>

@@ -1,10 +1,5 @@
 :root {
 
-  /* color-scheme: light dark; */
-  background-color: rgba(228, 228, 228, 0.901);
-  color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -31,6 +26,7 @@ font-family: "Montserrat", sans-serif;
     margin-top:3em;
     /* padding:2em; */
     border-radius: 1em;
+    color: rgb(255, 255, 255);
  }
 
  .login-text{

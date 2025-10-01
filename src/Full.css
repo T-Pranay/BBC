@@ -3,7 +3,7 @@ html, body, #root {
   margin: 0;                 
   padding: 0;
   background-color: #f5f5f577; 
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .dashboard-container {
   display: flex;
@@ -18,6 +18,7 @@ html, body, #root {
   background:linear-gradient(90deg,rgba(25, 126, 163, 0.575),rgb(6, 80, 106)) ;
   font-size:2.5rem ;
   border-radius: 10px;
+  color:rgb(255, 255, 255)
 }
 
 .options{
@@ -55,6 +56,7 @@ html, body, #root {
   transition: background-color 0.2s;
   font-size: 1.3rem;
   color: black;
+  user-select: none;
 }
 
 
@@ -97,3 +99,133 @@ html, body, #root {
   #add-text{
     padding: 0 1rem 0 1rem;
   }
+
+  .blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    backdrop-filter: blur(5px);
+    pointer-events: auto;
+  }
+
+  .overlay{
+    z-index: 1000; 
+    display: flex;
+    flex-direction: column;
+    margin: -2rem auto;
+    justify-content: center;
+    pointer-events: auto;
+    width:60%;
+    max-width:500px;
+    background: rgba(0, 0, 0, 0.525);
+    padding:1rem 1rem 1rem 1rem;
+    border-radius: 25px;
+    justify-content: center;
+    position: fixed;  
+    top: 50%;          
+    left: 50%;        
+    transform: translate(-50%, -40%);
+  }
+
+  .cancel{
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    position: absolute;
+    right:15px;
+    top:15px;
+    margin:1rem;
+    color: aliceblue;
+  }
+
+  #game-label,#count-label,#ques-label{
+    margin:2rem 0rem 0.1rem 1.2rem;
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+  }
+
+  #game-label{
+    margin-top: 3rem;
+  }
+
+  .overlay input{
+    width:85%;
+    margin:0.2rem auto;
+    font-size: 18px;
+    padding:0.3rem 0.8rem;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .overlay input:focus{
+    outline: none;
+    border:3px solid #4c7e93;
+  }
+
+  .game-submit{
+    width:auto;
+    margin:2rem auto;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 1.5px solid white;
+    background: linear-gradient(90deg,rgba(255, 255, 255, 0.66),rgba(93, 93, 93, 0.173));
+    padding:0.6rem 1.2rem;
+    user-select: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px white;;
+  }
+
+  .games-content{
+    background:rgba(0, 0, 0, 0.259) ;
+    width:85vw;
+    height:auto;
+    margin:2rem auto;
+    /* margin-bottom:1rem; */
+    padding:1rem;
+    border-radius:15px;
+  }
+
+  .game-name{
+    width:100%;
+    margin:0.5rem 1rem 1rem 1rem;
+    font-size: large;
+  }
+
+  .team-boxes{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin:0rem auto;
+    justify-items: center;
+  }
+
+  .box{
+    background-color: #4c7e93;
+    height:200px;
+    width:200px;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    font-size: larger;
+    font-weight: 400;
+    color: white;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 500px) {
+  .team-boxes{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .box {
+    height: 150px;
+    width: 150px;
+  }
+}
