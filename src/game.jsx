@@ -172,7 +172,7 @@ function Game(){
             <div key={i} className="game-card-skeleton">
               <div className="game-name-skeleton shimmer"></div>
               <div className="team-boxes">
-                {[...Array(3)].map((_, j) => (
+                {[...Array(2)].map((_, j) => (
                   <div key={j} className="box-skeleton shimmer"></div>
                 ))}
               </div>
@@ -213,6 +213,7 @@ function Game(){
                 </div>
               </div>
             ))}
+            <div className="some"></div>            
           </>
         )
       )}

@@ -59,6 +59,10 @@ function Team() {
     navigate(`/questions/${game}/${team}/${q}`)
   }
 
+      const back = () => {
+        navigate(-1);
+    }
+    
   return (
     <>
       {data && (
@@ -66,7 +70,7 @@ function Team() {
           <div className="profile-name">
             {data.game.name} &#9679; Team {teamName}
           </div>
-
+          <div className="back" onClick={back}>&lt; Back</div>
           <div className="questions">
             {data.team.question?.map((q) => (
                     <div key={q.id} className="question-box" onClick={()=>questionButton(gameId,teamName,q.id)} > {q.id}. {q.text}<span className="arrow">&gt;</span></div>                 

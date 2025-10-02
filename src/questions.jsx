@@ -7,13 +7,17 @@ import "./Full.css";
 
 
 function Question(){
+    const navigate = useNavigate();
 
     const {game,team,q} = useParams();
     const [text,setText] = useState('');
     const [options,setOptions] = useState([])
     const [answer,setAnswer] = useState('');
+    const [temptext,setTemptext] = useState("");
+
  useEffect(() => {
   const fetchQuestion = async () => {
+    setTemptext("Fetching question...")
     const teamId = `Team:${team}`;
     const ref = doc(db, 'games', game, 'team', teamId);
 
@@ -22,7 +26,6 @@ function Question(){
     try {
       const refSnap = await getDoc(ref);
       if (!refSnap.exists()) alert("Team doc doesn't exist");
-
       const snapQue = await getDoc(queRef);
       if(!snapQue.exists()){
             setDoc(queRef,{
@@ -30,8 +33,19 @@ function Question(){
                 options:options,
                 answer:answer
             })
+      } else if(snapQue.exists()){
+         const data = snapQue.data();
+         setAnswer(data.answer);
+         setText(data.question);
+         setOptions(data.options || ["", "", "", ""]);
+
+        // if (Array.isArray(data.options)) {
+        //     setOptions(data.options);
+        // } else {
+        //     setOptions([]); 
+        // }
       }
-      
+      setTemptext("")
     } catch (err) {
       console.error(err);
     }
@@ -40,21 +54,86 @@ function Question(){
   fetchQuestion();
 }, [game, team, q]);
 
+    const back = () => {
+        navigate(-1);
+    }
+
+    const quesSubmit = async ()=>{
+        if (
+            !text.trim() ||
+            !["1", "2", "3", "4"].includes(answer.trim()) ||
+            !Array.isArray(options) ||
+            options.length !== 4 ||
+            options.some(opt => !opt || !opt.trim()) ||
+            isNaN(Number(answer)) ||
+            Number(answer) < 1 ||
+            Number(answer) > 4
+        ) {
+            setTemptext("Please enter valid fields")
+            setTimeout(()=>{
+            setTemptext('')
+            },4000)
+            return;
+        }
+        try {
+            setTemptext("Updated question successfully")
+            setTimeout(()=>{
+                setTemptext('')
+            },4000)
+            const teamId = `Team:${team}`;
+            const docRef = doc(db, 'games', game, 'team', teamId, 'question', `ques:${q}`);
+            const snap = await getDoc(docRef);
+            if (!snap.exists()) {
+                alert('Doc doesnt exist')
+            }
+            await setDoc(docRef,{
+                answer:answer,
+                options:options,
+                question:text
+            },{merge:true})
+
+            // update teams page question 
+            const teamPage = doc(db, 'games', game, 'team', teamId);
+            const teamSnap = await getDoc(teamPage);
+            if (!teamSnap.exists()) {
+                alert('Doc doesnt exist')
+            }
+
+            const data = teamSnap.data();
+            let questions = data.question || [];
+            if (questions[q-1]) {
+                questions[q-1] = {...questions[q-1],
+                    text: text,
+                    correctAnswer: answer
+            }
+            await setDoc(teamPage, { question: questions }, { merge: true });
+            console.log('updated')
+        }
+
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return(
         <>
-        <div className="question-number">Question:{q}</div>
-        <div className="back">&lt; Back</div>
-        <label id="q-label" htmlFor="question">Question</label>
-        <input id="q-input" type="text" value={text} onChange={(e) => setText(e.target.value)}></input>
-        <div className="options-container">
-            {Array.from({length:4}).map((_,i) => (
-                <div key={i} className="options-box">
-                    <label>Option {i+1}</label>
-                    <input
-                        type="text"
-                        value = {options[i] || ''}
-                        onChange = {(e) => {
+            {temptext && (
+                <div className="temp-text">{temptext}</div>
+            )}    
+
+                
+            <div className="q-page">
+                <div className="question-number">Question: {q}</div>
+                <div className="back" onClick={back}>&lt; Back</div>
+                <label id="q-label" htmlFor="question">Question</label>
+                <textarea id="q-input" placeholder="Type your question here" type="text" value={text}
+                    onChange={(e)=> {setText(e.target.value)}}></textarea>
+                <div className="options-container">
+                    {Array.from({length:4}).map((_,i) => (
+                    <div key={i} className="options-box">
+                        <label id="options">Option {i+1}</label>
+                        <textarea id="o-text" type="text" value={options[i] || '' } onChange={(e)=> {
                             const newOptions = [...options];
                             newOptions[i] = e.target.value;
                             setOptions(newOptions);
@@ -62,7 +141,14 @@ function Question(){
                     />
                 </div>
             ))}
-        </div>         
+        </div>  
+            <label id="c-label" htmlFor="correct">&#9679; Enter correct option in number</label> 
+            <input type="number" id="correct" placeholder="1 or 2 or 3 or 4" value={answer} onChange={(e) => {setAnswer(e.target.value)}} />
+            <button className="q-submit" onClick={quesSubmit}>Submit</button>
+
+            {/* -------------- */}
+            <div className="some"></div>            
+            </div>
         </>
     )
 }
