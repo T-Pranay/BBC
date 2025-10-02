@@ -5,6 +5,7 @@ import Login from "./Login.jsx";
 import Loading from "./Loading.jsx";
 import Team from './team.jsx'
 import Game from "./game.jsx";
+import Question from './questions.jsx'
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -41,11 +42,12 @@ function App() {
           element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} 
       />
 
-      <Route index element={<Game />} />
+      <Route element={<Game />} />
       <Route path="/team/:gameId/:teamName" element={<Team />} />
 
-
-    </Routes>
+      <Route path="/questions/:game/:team/:q" element = {<Question/>} />
+      
+      </Routes>
       </>
   );
 }

@@ -56,15 +56,15 @@ function Game(){
         e.preventDefault();
         setOverlay(false);
 
-        setTemptext("Loading new game...");
+      if (!game || teams < 1 || ques < 1) {
+          alert("Enter valid values");
+          return;
+      }
+
+      setTemptext("Loading new game...");
         setTimeout(() => {
             setTemptext('')
-        }, 4000);
-
-        if (!game || teams < 1 || ques < 1) {
-            alert("Enter valid values");
-            return;
-        }
+      }, 4000);
 
     const gameId = "game-" + Date.now();
     try {
@@ -89,22 +89,27 @@ function Game(){
     }
     }
 
-    const handleDelete = async (id) =>{
-        try{
-            setGamesSet((prevGames) => prevGames.filter((g) => g.id !== id));
+    const handleDelete = async (id) => {
+      try {
+        setGamesSet((prevGames) => prevGames.filter((g) => g.id !== id));
+        setTemptext("Deleted game...");
+        setTimeout(() => {
+          setTemptext('')
+        }, 4000);
 
-            setTemptext("Deleted game...");
-            setTimeout(() => {
-                setTemptext('')
-            }, 4000);
+        const gameRef = doc(db, "games", id);
+        const teamsCol = collection(db, "games", id, "team");
+        const teamsSnap = await getDocs(teamsCol);
 
-            const docId = doc(db,'games',id);
-            await deleteDoc(docId);
-            setConfirmdelete(null)
-            fetchGames();
-        } catch(err){
-            console.log(err)
+        for (const teamDoc of teamsSnap.docs) {
+          await deleteDoc(teamDoc.ref);
         }
+        await deleteDoc(gameRef);
+
+        fetchGames();
+      } catch (err) {
+        console.log(err)
+      }
     }
 
     const navigatePage = (gameId,teamName) => {
@@ -137,7 +142,7 @@ function Game(){
             {/* {temp text} */}
 
             {temptext && (
-                <div className="temp-text">{temptext} Loading new game...</div>
+                <div className="temp-text">{temptext}</div>
             )}
 
             {/* overlay */}
