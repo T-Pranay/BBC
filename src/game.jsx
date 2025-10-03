@@ -14,7 +14,7 @@ import { db } from "./firebase.js";
 import { useState,useEffect } from "react"
 import "./Full.css"
 import Team from './team.jsx'
-import { useNavigate,Route,Routes } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 
 
