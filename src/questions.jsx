@@ -142,7 +142,7 @@ function Question(){
                 </div>
             ))}
         </div>  
-            <label id="c-label" htmlFor="correct">&#9679; Enter correct option in number</label> 
+            <label id="c-label" htmlFor="correct">&#9679; Set correct option in number</label> 
             <input type="number" id="correct" placeholder="1 or 2 or 3 or 4" value={answer} onChange={(e) => {setAnswer(e.target.value)}} />
             <button className="q-submit" onClick={quesSubmit}>Submit</button>
 

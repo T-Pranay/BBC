@@ -28,7 +28,8 @@ body,
   background: linear-gradient(90deg, rgba(25, 126, 163, 0.575), rgb(6, 80, 106));
   font-size: 2.5rem;
   border-radius: 10px;
-  color: rgb(255, 255, 255)
+  color: rgb(255, 255, 255);
+  width:100%;
 }
 
 .options {
@@ -128,7 +129,7 @@ body,
   margin: -2rem auto;
   justify-content: center;
   pointer-events: auto;
-  width: 60%;
+  width: 80%;
   max-width: 500px;
   background: rgba(0, 0, 0, 0.463);
   padding: 1rem 1rem 1rem 1rem;
@@ -204,7 +205,7 @@ body,
 
 .game-name {
   width: 100%;
-  margin: 0.5rem 1rem 1rem 1rem;
+  margin: 0.25rem 1rem 1.5rem 1rem;
   font-size: 1.3rem;
   font-weight: 350;
 }
@@ -247,7 +248,7 @@ body,
 
 .more{
   position: absolute;
-  top:15px;
+  top:18px;
   right:35px;
   user-select: none;
   cursor: pointer;
@@ -442,6 +443,10 @@ body,
   cursor: pointer;   
 }
 
+.question-box:hover{
+   background:rgb(52, 105, 114);
+}
+
  /* .arrow{
   position: absolute;
   right:4.8%;
@@ -490,6 +495,7 @@ body,
   cursor: pointer;
   user-select: none;
   margin: 1rem;
+  border: 1.5px solid rgb(9, 9, 9);
  }
 
  #q-label{
@@ -696,3 +702,52 @@ body,
     background-position: -200% 0;
   }
 }
+
+/* Play page */
+ .games-container{
+  background-color: #365a69f3;
+  width:85%;
+  max-width:650px;
+  margin:2rem auto;
+  /* margin-bottom: -2rem; */
+  padding: 2.5rem 0rem 2.5rem 0rem;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+ }
+
+ .play-game{
+  font-size: 1.8rem;
+  margin:2rem;
+ }
+
+ .play-arrow{
+  transform: rotate(180deg);
+  font-size: 3rem;
+  background: rgb(27, 67, 78);
+  position: absolute;
+  right:0px;
+  height:100%;
+  align-items: center;
+  text-align: center;
+  display:flex;
+  padding:0 0.8rem 0 0.8rem;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+ }
+
+ .games-container:hover{
+  background: rgb(27, 67, 78);
+ }
+
+ @media (min-width:520px) {
+  .play-game{
+  font-size: 2rem;
+  margin:2rem;
+ }
+ }
