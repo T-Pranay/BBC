@@ -14,6 +14,8 @@ function Question(){
     const [options,setOptions] = useState([])
     const [answer,setAnswer] = useState('');
     const [temptext,setTemptext] = useState("");
+    const [refer,setRefer] = useState('');
+    const [time,setTime] = useState('');
 
  useEffect(() => {
   const fetchQuestion = async () => {
@@ -67,7 +69,9 @@ function Question(){
             options.some(opt => !opt || !opt.trim()) ||
             isNaN(Number(answer)) ||
             Number(answer) < 1 ||
-            Number(answer) > 4
+            Number(answer) > 4 ||
+            !time.trim() ||
+            !refer.trim()
         ) {
             setTemptext("Please enter valid fields")
             setTimeout(()=>{
@@ -80,16 +84,19 @@ function Question(){
             setTimeout(()=>{
                 setTemptext('')
             },4000)
+
             const teamId = `Team:${team}`;
             const docRef = doc(db, 'games', game, 'team', teamId, 'question', `ques:${q}`);
             const snap = await getDoc(docRef);
             if (!snap.exists()) {
                 alert('Doc doesnt exist')
             }
-            await setDoc(docRef,{
-                answer:answer,
+            await setDoc(docRef,{            
+                question:text,
                 options:options,
-                question:text
+                answer:answer,
+                time : time,
+                reference : refer
             },{merge:true})
 
             // update teams page question 
@@ -142,8 +149,14 @@ function Question(){
                 </div>
             ))}
         </div>  
-            <label id="c-label" htmlFor="correct">&#9679; Set correct option in number</label> 
-            <input type="number" id="correct" placeholder="1 or 2 or 3 or 4" value={answer} onChange={(e) => {setAnswer(e.target.value)}} />
+            <div className="extras">
+                <label id="e-label" htmlFor="correct"> Set correct option</label> 
+                <input type="number" id="correct" className="e-inputs" placeholder="1 or 2 or 3 or 4" value={answer} onChange={(e) => {setAnswer(e.target.value)}} />     
+                <label id="e-label" htmlFor="ref"> Set Reference</label> 
+                <input type="text" id="ref" className="e-inputs" value={refer} onChange={(e) => {setRefer(e.target.value)}} />           
+                <label id="e-label" htmlFor="time"> Set Timer for question</label> 
+                <input type="number" id="time" className="e-inputs" placeholder="value in seconds" value={time} onChange={(e) => {setTime(e.target.value)}} />                            
+            </div>
             <button className="q-submit" onClick={quesSubmit}>Submit</button>
 
             {/* -------------- */}

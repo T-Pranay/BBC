@@ -4,6 +4,7 @@ import {
   doc,
   setDoc,
   getDocs,
+  getDoc,
   collection,
   deleteField,
   updateDoc,
@@ -20,7 +21,9 @@ import "./Full.css"
 function Play(){
     const [temptext,setTemptext] = useState("");
     const [data,setData] = useState([]);
-    const [loading,setLoading] = useState(true)
+    const [loading,setLoading] = useState(true);
+    const [overlay,setOverelay] = useState(false);
+    const [id, setId] = useState(null);
 
     useEffect(()=>{
         try{
@@ -38,6 +41,23 @@ function Play(){
             console.log(err)
         }
     },[])
+
+    const getDetails = async (id) =>{
+        const ref = doc(db,'games',id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            setId({ 
+                id: snap.id, 
+                ...snap.data() 
+            }); 
+        } else {
+            console.log("No such document!");
+        }
+    }
+
+    useEffect(() => {
+    }, [id]);
+
     return (
         <div>
             {loading? (
@@ -45,14 +65,28 @@ function Play(){
             ) : (
                 data.map((d) => (
                     <>
-                    <div key={d.id} className="games-container">
+                    <div key={d.id} className="games-container" onClick={() => {setOverelay(true); getDetails(d.id)}}>
                             <div className="play-game">{d.name}</div>
                             <div className="play-arrow">&lt;</div>
                     </div>
                     </>
                 ))
-
             )}
+            {overlay && id && (
+            <div className="play-overlay">
+                <div className="close" onClick={() => {setOverelay(false);setId(null)}} >X</div>
+                <div className="play-game-name">{id.name}</div>
+                <div className="play-what">Play</div>
+                <div className="whole">Whole game</div>
+                <div className="line-play"></div>
+                <div className="teams-avail"  >
+                    {Array.from({length : id.teams}).map((_,t) =>(
+                        <div className="teams-show" key = {t.id}>Team {t +1}</div>
+                    ))}
+                </div>    
+            </div>
+            )}
+
         </div>
     )
 }

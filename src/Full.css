@@ -563,13 +563,22 @@ body,
   border: 2px solid rgb(57, 57, 57);
  }
 
- #c-label{
-  display:block;
-  font-size: 20px;
-  margin:2rem 0rem 1rem 2rem;
+ .extras{
+  background-color: rgb(235, 234, 234);
+  width:88%;
+  margin:1rem auto;
+  padding:0.5rem;
+  border-radius: 25px;
+  margin-bottom: 2rem;
  }
 
- #correct{
+ #e-label{
+  display:block;
+  font-size: 20px;
+  margin:0.75rem 0rem 0.5rem 1rem;
+ }
+
+ .e-inputs{
   display: block;
   margin:0 auto;
   border-radius: 8px;
@@ -578,6 +587,7 @@ body,
   font-size: 18px;
   background-color: #7ebdd783;
   overflow: hidden;
+  margin-bottom: 1rem;
  }
 
  @media screen and (min-width:600px) {
@@ -750,4 +760,92 @@ body,
   font-size: 2rem;
   margin:2rem;
  }
+ }
+
+ /* play page overlay */
+ .play-overlay{
+  position: fixed;
+  background-color: rgba(254, 254, 254, 0.386);
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  backdrop-filter: blur(15px);
+  padding:1rem;
+  border-radius: 1rem;
+  width:70%;
+  color:rgb(0, 0, 0);
+  user-select: none;
+ }
+
+ .play-game-name{
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1.75rem;
+ }
+
+ .play-what{
+  font-size: 1.5rem;
+  font-weight: 350;
+  margin-left: 1rem;
+ }
+
+ .whole{
+  background-color: #365a69;
+  padding:0.8rem 0.4rem;
+  width:80%;
+  margin:1rem auto;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ffffff;
+ }
+
+ .whole:hover{
+  background-color: #426d7f;
+ }
+
+ .line-play{
+  content: "";
+  height:1.2px;
+  width:90%;
+  background: rgb(0, 0, 0);
+  margin: 0 auto;
+  margin-bottom: 1rem;
+ }
+
+ .teams-avail{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 0rem auto;
+  justify-items: center;
+ }
+
+ .teams-show{
+   display:block;
+   background-color: #376477;
+   width:120px;
+   height: 35px;
+   font-size: 20px;
+   text-align: center;
+   padding:0.4rem;
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  cursor: pointer;
+  color: white;
+ }
+
+ .teams-show:hover{
+  background-color: #50849a;
+ }
+
+ .close{
+  position: fixed;
+  right:30px;
+  display:block;
+  font-size: 30px;
+  cursor: pointer;
  }
