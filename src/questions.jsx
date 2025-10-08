@@ -2,7 +2,7 @@ import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.3.0/f
 import { db } from "./firebase.js";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import "./Full.css";
+import "./css/Full.css";
 // import Question from './questions.jsx'
 
 
@@ -33,13 +33,17 @@ function Question(){
             setDoc(queRef,{
                 question:text,
                 options:options,
-                answer:answer
+                answer:answer,
+                time : time,
+                reference : refer
             })
       } else if(snapQue.exists()){
          const data = snapQue.data();
          setAnswer(data.answer);
          setText(data.question);
          setOptions(data.options || ["", "", "", ""]);
+         setRefer(data.reference);
+         setTime(data.time)
 
         // if (Array.isArray(data.options)) {
         //     setOptions(data.options);

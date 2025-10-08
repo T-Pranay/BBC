@@ -2,7 +2,7 @@ import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.3.0/f
 import { db } from "./firebase.js";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import "./Full.css";
+import "./css/Full.css";
 import Question from './questions.jsx'
 
 function Team() {

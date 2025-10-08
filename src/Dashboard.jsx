@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Full.css";
+import "./css/Full.css";
 import Play from './play.jsx'
 import Game from './game.jsx'
 import Score from './score.jsx'

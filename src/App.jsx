@@ -6,6 +6,7 @@ import Loading from "./Loading.jsx";
 import Team from './team.jsx'
 import Game from "./game.jsx";
 import Question from './questions.jsx'
+import P from './p.jsx'
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,8 @@ function App() {
 
       <Route path="/questions/:game/:team/:q" element = {<Question/>} />
       
+      <Route path = "/p/:id" element = {<P/>}/>
+
       </Routes>
       </>
   );

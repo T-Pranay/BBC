@@ -10,6 +10,64 @@ font-family: "Montserrat", sans-serif;
   font-style: normal;
 }
 
+/* loading */
+
+/* Fullscreen center alignment */
+.loading-container {
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Logo styling */
+.loading-logo {
+  width: 250px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #00b4ff) brightness(1);
+  animation: glow 2.5s ease-in-out infinite alternate;
+}
+
+/* Text below logo */
+.loading-text {
+  color: #ffffff;
+  font-size: 1.3rem;
+  margin-top: 2.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #00b4ff, 0 0 0px #00b4ff;
+  animation: fade 2s infinite;
+}
+
+/* Logo glow animation */
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px #00b4ff) brightness(1);
+    transform: scale(1);
+  }
+  to {
+    filter: drop-shadow(0 0 15px #00b4ff) brightness(1.4);
+    transform: scale(1.05);
+  }
+}
+
+/* Fading text animation */
+@keyframes fade {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* login */
+
+
 .main-text{
     text-align: center;
     font-size: 2em;
@@ -93,3 +151,4 @@ font-family: "Montserrat", sans-serif;
     align-items: center;
     user-select: none;
  }
+

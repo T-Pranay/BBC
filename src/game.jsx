@@ -12,7 +12,7 @@ import {
 import { db } from "./firebase.js";
 
 import { useState,useEffect } from "react"
-import "./Full.css"
+import "./css/Full.css"
 import Team from './team.jsx'
 import { useNavigate} from "react-router-dom";
 

@@ -765,7 +765,7 @@ body,
  /* play page overlay */
  .play-overlay{
   position: fixed;
-  background-color: rgba(254, 254, 254, 0.386);
+  background-color: rgba(254, 254, 254, 0.415);
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
@@ -775,6 +775,7 @@ body,
   width:70%;
   color:rgb(0, 0, 0);
   user-select: none;
+  max-width: 480px;
  }
 
  .play-game-name{
@@ -837,6 +838,16 @@ body,
   cursor: pointer;
   color: white;
  }
+
+  @media (max-width:500px){
+    .teams-avail{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    } 
+    .teams-show{
+      width:100px;
+    }
+  }
 
  .teams-show:hover{
   background-color: #50849a;

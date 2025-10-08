@@ -13,11 +13,10 @@ import {
 import { db } from "./firebase.js";
 
 import { useState,useEffect } from "react"
-import "./Full.css"
+import "./css/Full.css"
 import Team from './team.jsx'
 import { useNavigate} from "react-router-dom";
 
-import "./Full.css"
 function Play(){
     const [temptext,setTemptext] = useState("");
     const [data,setData] = useState([]);
@@ -25,6 +24,7 @@ function Play(){
     const [overlay,setOverelay] = useState(false);
     const [id, setId] = useState(null);
 
+    const navigate = useNavigate();
     useEffect(()=>{
         try{
             const fetch = async () =>{
@@ -58,18 +58,30 @@ function Play(){
     useEffect(() => {
     }, [id]);
 
+    // whole game
+
+    const handleGame = async (id) =>{
+        navigate(`/p/${id}`)
+    }
+
     return (
         <div>
             {loading? (
-                <div>No data found.</div>
+            <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                fontSize: "1.5rem"
+            }}>
+                No data found.
+            </div>
             ) : (
                 data.map((d) => (
-                    <>
                     <div key={d.id} className="games-container" onClick={() => {setOverelay(true); getDetails(d.id)}}>
                             <div className="play-game">{d.name}</div>
                             <div className="play-arrow">&lt;</div>
                     </div>
-                    </>
                 ))
             )}
             {overlay && id && (
@@ -77,7 +89,7 @@ function Play(){
                 <div className="close" onClick={() => {setOverelay(false);setId(null)}} >X</div>
                 <div className="play-game-name">{id.name}</div>
                 <div className="play-what">Play</div>
-                <div className="whole">Whole game</div>
+                <div className="whole" onClick={() => handleGame(id.id)}>Whole game</div>
                 <div className="line-play"></div>
                 <div className="teams-avail"  >
                     {Array.from({length : id.teams}).map((_,t) =>(
